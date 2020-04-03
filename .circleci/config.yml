@@ -1,0 +1,27 @@
+version: 2.1
+
+# list of small tasks/functions to run
+jobs:
+    my_run1:
+        docker:
+            - image: ubuntu/18.04:latest #owner/repo:tag
+        steps:
+            - checkout #pull the repo in the docker container
+            - run: do_whatever_you_want
+            - run: 
+                working_directory: /here/but/not/there
+                command: my_command1
+    
+    my_run2:
+        docker:
+            - image: ubuntu/18.04:latest #owner/repo:tag
+        steps:
+            - run:
+
+
+
+# define your worlflows, list all the taks of functions you want to run.
+workflows:
+    my_workflow1:
+        jobs:
+
