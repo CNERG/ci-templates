@@ -16,7 +16,19 @@ jobs:
         docker:
             - image: ubuntu/18.04:latest #owner/repo:tag
         steps:
-            - run:
+            - run: XX
+    
+    my_run3:
+        docker:
+            - image: ubuntu/18.04:latest #owner/repo:tag
+        steps:
+            - run: YY
+    
+    my_run4:
+        docker:
+            - image: ubuntu/18.04:latest #owner/repo:tag
+        steps:
+            - run: YY
 
 
 
@@ -24,4 +36,12 @@ jobs:
 workflows:
     my_workflow1:
         jobs:
-
+            - my_run1
+            - my_run2
+            - my_run3:
+                requires:
+                    - my_run2
+            - my_run4:
+                requires:
+                    - my_run3
+                branches: master
