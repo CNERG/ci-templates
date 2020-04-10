@@ -16,3 +16,10 @@ jobs:
 
 
 workflows:
+    workflow1:
+        jobs:
+            - build_website
+            - deploy_website
+                requires:
+                    - build_website
+                branches: master
