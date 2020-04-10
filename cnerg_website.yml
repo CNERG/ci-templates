@@ -1,0 +1,25 @@
+version: 2.1
+
+jobs:
+    build_website:
+        docker:
+            - image: cnerg/cnerg.github.io-deps:latest
+        steps:
+            - checkout
+            - run: make gh-preview
+    deploy_website:
+        docker:
+            - image: cnerg/cnerg.github.io-deps:latest
+        steps:
+            - checkout
+            - run: make gh-publish
+
+
+workflows:
+    workflow1:
+        jobs:
+            - build_website
+            - deploy_website
+                requires:
+                    - build_website
+                branches: master
