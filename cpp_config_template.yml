@@ -1,0 +1,32 @@
+version: 2.1
+# no TABS
+# small tasks to be called, compliations, builds, tests
+jobs:
+        building:
+                docker:
+                        - image: cnerg/ubuntu-18.04_pyne-3:latest #any public docker container
+                steps:
+                        - checkout
+                        - run: cmake something build line goes here
+        testing:
+                docker:
+                        - image: cnerg/ubuntu-18.04_pyne-3:latest #any public docker container
+# calls jobs, driverl
+                steps:
+                        - run: cmake something build line goes here
+                        - run:
+                             working_directory: ~/build
+                             command: ctest -v -r ...
+        pushing:
+                docker:
+                        - image: cnerg/ubuntu-18.04_pyne-3:latest #any public docker container
+                steps:
+                        -run: git push origin master
+workflow:
+        test_workflow:
+                jobs:
+                        -building
+                        -testing
+                        -pushing:
+                            -requires:
+                                -testing
