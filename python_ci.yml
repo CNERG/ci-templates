@@ -1,46 +1,26 @@
 version: 2.1
 
 jobs:
-    install_py3:
-        docker:
-            - image: svalinn/pymoab-py3-18.04
-        steps:
-            - checkout #pull repo in the docker container
-            - run: pip install -e . --user
     run_test_py3:
         docker:
             - image: svalinn/pymoab-py3-18.04
         steps:
             - checkout #pull repo in the docker container
-            - run: pip install -e . --user
             - run:
                 working_drectory: #/directory
-            command: pytest
+            command: python -m pytest
 
-    install_py2:
-        docker:
-            - image: svalinn/pymoab-py2-18.04
-        steps:
-            - checkout #pull repo in the docker container
-            - run: pip install -e . --user
     run_test_py2:
         docker:
             - image: svalinn/pymoab-py2-18.04
         steps:
             - checkout #pull repo in the docker container
-            - run: pip install -e . --user
             - run:
                 working_drectory: #/directory
-            command: pytest
+            command: python -m pytest
 
 workflows:
     my_workflows:
         jobs:
-            - install_py3
             - run_test_py3
-                requires:
-                   - install_py3
-            - install_py2
             - run_test_py2
-                requires:
-                    - install_py2
