@@ -42,11 +42,11 @@ jobs:
 workflows:
     my_workflows:
         jobs:
-            - install_py3
-            - run_test_py3:
+            - run_test_py3
+            - install_py3:
                 - requires:
-                    install_py3
+                    run_test_py3
+            - run_test_py2
             - install_py2
-            - run_test_py2:
                 - requires:
-                    install_py2
+                    run_test_py2
