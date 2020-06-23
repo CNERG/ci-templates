@@ -44,4 +44,4 @@ workflows:
             - my_run4:
                 requires:
                     - my_run3
-                branches: master
+                branches: main

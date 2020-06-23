@@ -22,4 +22,4 @@ workflows:
             - deploy_website
                 requires:
                     - build_website
-                branches: master
+                branches: main
